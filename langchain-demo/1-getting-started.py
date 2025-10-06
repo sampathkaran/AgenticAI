@@ -1,23 +1,31 @@
-from dotenv import load_dotenv
-from langchain_openai.chat_models import ChatOpenAI
+from dotenv import load_dotenv # laod the environmental variables
+from langchain_openai.chat_models import ChatOpenAI # to work with chatcompletion api
 
+#load env variables
 
 load_dotenv()
+
+# construct messages - we specify role and specify the text
 messages = [(
-    "system",
-    "you are help assistant translate from english to tamil"
-),
-(
-    "human", "I love programming in python"
-)
+             "system",
+             "you are helpful that translates from English to Tamil" 
+            ),
+            ("human", "I miss you Appa")
+
 ]
 
 # initialize the chat model
-model = ChatOpenAI(model = "gpt-3.5-turbo", temperature = 0.5)
 
-# Response
+model = ChatOpenAI(
+    model = "gpt-5-nano", temperature = 0.5
+)
+
+# to get the response
+
 response = model.invoke(messages)
 print(response.content)
 
-response = model.invoke("what is the lastest new in tamilnadu")
+# or we can execute the message directly
+
+response = model.invoke("coimbatore is ")
 print(response.content)
