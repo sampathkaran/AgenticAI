@@ -1,0 +1,11 @@
+prefix=/home/sam/my-study/AgenticAI/week-1-2-13102025/1-foundations-langchain/myenv
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: XCB Present
+Description: XCB Present Extension
+Version: 1.17.0
+Requires.private: xcb xcb-randr xcb-xfixes xcb-sync xcb-dri3
+Libs: -L${libdir} -lxcb-present
+Cflags: -I${includedir}

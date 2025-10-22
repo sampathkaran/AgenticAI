@@ -1,0 +1,5 @@
+#!/home/sam/my-study/AgenticAI/week-1-2-13102025/1-foundations-langchain/myenv/bin/python3.11
+
+import pydoc
+if __name__ == '__main__':
+    pydoc.cli()
