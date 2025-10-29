@@ -132,10 +132,155 @@ Output format:
 - we template the human messages in most of the time
 - we difne a schema ie to decide waht outout filds should we see by specifying keys
 
+MCP and A2A agent to agent:
 
 MCP:
 
+Basically an Agent uses tools to work with external appplication through api calls. The structure of apis exposed different for every application so we need a common protocol 
+
+
 MCP is a communication fraemwork that definers how ythe agents connect and exchange data with external systems
+
+every agent will have a mcp.conf file
+
+- MCP works in a client server model
+
+
+- A2A is bsaically agent to agent where the original agent will communicate with sub agent for a specific task.
+
+- 
+Chatcompletion is openAI's conversational API
+
+
+# Week 2 notes - 25102025
+
+- LLMs are pwoerful but hard to control in prod, that is where framework like lanchain will help.
+
+- 3 Benefits of Langchain 
+   - modularity
+   - composability - it is like lego that will connect multiple blocks 
+   - observability - tracking and monitoring agent
+
+- Core Buliding Block that makes up Agentic AI system
+   - Models: LLMs
+   -  Prompts: Message, Templates and parametrized inputs
+   - Memory - help agent to be context aware
+   - Tools - External helpers like api intergations
+   - Chains - Sequence of call to connect multiple steps like a pipeline
+   - Agents - decision makers that select which tool to use
+
+- LCEL - LangChain Expression Language
+    purpose: Build readable and composable pipelines
+    Fopr eg we connect multiple blocks using the | symbol (prompt|llm|output parser)
+
+
+
+Langchain Core concepts 
+
+why langchain ?
+the llms are powerful models
+to control llms in prod we use langchain library
+provide strucutred way to biuid ai apps
+
+
+Benefits 
+- modularity
+- composability - connect multiple blocks to work as a pipeline
+- obserbvvability - track, debug the agent
+
+core buidling blocks
+- Models: LLMs,ChatModels 
+- prompt: template, messages, parametrizzed inputs
+- Memory: Short-term, long-term ,episodic
+- Tools : seerachenginer, api integrations etc
+- Chains: Sequence of calls combinig prompt, models ,tools
+- Agents - decision makes that select which tools to use
+
+LCEL - Langchain Expression Language
+- creating composable pipelines
+
+
+Ecosystem Layers-
+
+- langchain is not library it is a ecosystem, it has 5 layers 
+
+
+
+Json outpout SchemaL
+keep fileds s mall and simple
+add desc fior fields
+alwats indcude addtonal instr
+validate output and retry if invalid 
+
+
+Comoom pitfalls and fixes:
+- invsaliod JSON error - fix enforce valid json only and parser retires
+- missing fields or wrongf data tyoes
+- overlong outputs
+- hallucinatios - fix alow unknown, forbid fabrications
+
+
+Prompt Template vs Chatprompttemplate
+
+the prompt template was used for older non chat like text based model
+the latest gpt models is uses the chatprompttemplate and instead of single message we can send strucitrd messages like system, human, assistant etc
+
+
+JSON output format
+
+- We wil use pyndatic output parser to get the json output
+
+
+Week 2 - 26102025
+
+Memmory concepts in LLM
+
+Concepts:
+- when we ask followp quesion sometimes the LLM 
+
+What is an Agent?
+LLM by default is stateless -- ie it not context aware by default
+
+Agent has to dynamic decision making
+Agent decide what to do next base on context
+
+LangChain Layers 
+
+1. Core-Model, Prompts, memory
+2. Orchestration - Chains, Agents, Langgraph
+3. Integrations - Api,Database, VectorStores
+4. Deployment: Docker, cloud functions, k8s
+5. Monitoring: Langsmith, Traceloop , Prometheus
+
+
+# Dynamic Prompt Template:
+this is to send prompt template where we have placeholders that can be parameterized
+
+Few shot prompt
+
+we will add examples to the prompt 
+
+Structured Output:
+
+Schema design tips:
+- keep the fields small and explicit
+- define which fields are require and which are optional
+- 
+
+- Add a instruction to force the LLM to send a structured output
+
+Insturction: Return only Valid Json, no extra text
+setup validation and retry if invalid
+
+Pitfall in output
+- invalid json - the fix is to enforce valid JSON only + parser retry
+- hallucination - Fix: allow unknown
+
+Questions:
+1. Ask assignment 1 where to add the instructions whether to system or human message ?
+2. LCEL not used in the code 
+3. No mardown frences
+
 
 
 
