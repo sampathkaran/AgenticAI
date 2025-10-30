@@ -4,6 +4,7 @@ from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate 
+import json
 import argparse 
 # pyndatic is a library to define the schema
 from pydantic import BaseModel, Field, ValidationError
@@ -74,8 +75,9 @@ last_error_hint = ""
 for attempt in range(args.max_retries + 1):
     if attempt == 0:
         formatted_prompt = prompt.format_messages(**variables)# ** denotes to treat each key as seperate variable
-        print("Formatted prompt for attempt 1")
-        print(formatted_prompt)
+        # print("Formatted prompt for attempt 1")
+        # print(formatted_prompt)
+    
     else:
         # retry logic with error hint appended to user message
         retry_prompt = ChatPromptTemplate.from_messages(
@@ -84,16 +86,40 @@ for attempt in range(args.max_retries + 1):
                     ("user",
                      """ 
                      The previous output was invalid JSON, refere to 
-                     Please correct the output to adhere to the format instructions.
+                     Please correct the output to adhere to the format in(structions.
                      Please return ONLY the correct JSON that follows the exact schema.
                      Do not include any extra text
+                     {last_error_hint}
                      """)])
-        formatted_prompt = retry_prompt.format_messages(**variables)
+        formatted_prompt = retry_prompt.format(**variables)
+        print(formatted_prompt)
     # invoke the model
     response = llm_gemini.invoke(formatted_prompt)
     # print(f"The response from Gemini model for Attempt{attempt + 1}")
     # print (response.content)
     
     #convert the output to the json string
-    raw_output = response.content.strip()
-    print(raw_output)
+    raw_output = response.content.strip() #.content.strip() → removes extra spaces/newlines
+    #print(raw_output)
+    if raw_output.startswith("```") or raw_output.endswith("```"):
+        # remove the markdown fences
+        cleaned_output = "\n".join(raw_output.split("\n")[1:-1])
+        #print(cleaned_output)
+        # Adding try and exception logic
+        try:
+            _ = json.loads(cleaned_output)
+
+        except Exception as e:
+            last_error_hint = f"JSON Parsin Error: {str(e)}"
+            print("validation Error", last_error_hint)
+            if attempt == args.max_retries:
+                 print("Max Retries Reached, Exiting")
+                 break
+            else:
+                continue
+    print("\nParsed Product Information:")
+    print(cleaned_output)
+    break
+
+
+
