@@ -1,7 +1,0 @@
-prefix=/home/sam/my-study/AgenticAI/week-1-2-13102025/1-foundations-langchain/myenv
-includedir=${prefix}/include
- 
-Name: DRI2Proto
-Description: DRI2 extension headers
-Version: 2.8
-Cflags: -I${includedir}

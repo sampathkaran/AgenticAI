@@ -1,7 +1,0 @@
-#!/home/sam/my-study/AgenticAI/week-1-2-13102025/1-foundations-langchain/myenv/bin/python3.11
-import sys
-from openai.cli import main
-if __name__ == '__main__':
-    if sys.argv[0].endswith('.exe'):
-        sys.argv[0] = sys.argv[0][:-4]
-    sys.exit(main())

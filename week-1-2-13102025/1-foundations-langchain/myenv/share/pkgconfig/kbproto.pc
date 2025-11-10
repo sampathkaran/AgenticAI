@@ -1,7 +1,0 @@
-prefix=/home/sam/my-study/AgenticAI/week-1-2-13102025/1-foundations-langchain/myenv
-includedir=${prefix}/include
- 
-Name: KBProto
-Description: KB extension headers
-Version: 1.0.7
-Cflags: -I${includedir}

@@ -1,7 +1,0 @@
-prefix=/home/sam/my-study/AgenticAI/week-1-2-13102025/1-foundations-langchain/myenv
-includedir=${prefix}/include
- 
-Name: XF86DRIProto
-Description: XF86DRI extension headers
-Version: 2.1.1
-Cflags: -I${includedir}/X11/dri

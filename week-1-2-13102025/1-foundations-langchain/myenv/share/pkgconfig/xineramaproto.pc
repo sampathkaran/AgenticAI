@@ -1,7 +1,0 @@
-prefix=/home/sam/my-study/AgenticAI/week-1-2-13102025/1-foundations-langchain/myenv
-includedir=${prefix}/include
- 
-Name: XineramaProto
-Description: Xinerama extension headers
-Version: 1.2.1
-Cflags: -I${includedir}

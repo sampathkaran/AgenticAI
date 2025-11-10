@@ -1,7 +1,0 @@
-prefix=/home/sam/my-study/AgenticAI/week-1-2-13102025/1-foundations-langchain/myenv
-includedir=${prefix}/include
- 
-Name: RandrProto
-Description: Randr extension headers
-Version: 1.6.0
-Cflags: -I${includedir}
