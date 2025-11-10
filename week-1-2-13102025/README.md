@@ -282,6 +282,252 @@ Questions:
 3. No mardown frences
 
 
+Lanchain Memory:
+
+By default the LLMs are not context aware 
+llm by default stateless
+so we use memory to provide context
+Ability for agent to remmber prevous conversation turns
+
+
+Types of Langchain Memory
+
+- ConversationBufferMemory - 
+     This will store the entire full history
+     But it can grow to larger
+     best for short and simple chats
+
+- ConvesationBufferWindowMemory 
+    Last "N" exchange, eg where N=5 it  remembers last 5 conversation
+    more efficient and avoid token overflow
+    great for recent context only
+
+- ConversationSummaryMemory 
+    It usmmarizes the past interaction into keypoints and requires less memory.
+    good for long chat
+
+- Entoty Memory - 
+         remember structured facts about people, place etc
+         enable personalization across turns
+
+Challenges:
+- context can go large and hit the toekn limit and cause issues
+- model might hallucinate
+- need balance between retention and summarization
+
+
+
+Which one to use
+
+
+What is Agent?
+We need agent ot dynamically do decsiion  making
+agents decies what to do based on the context
+
+Tools = it is the skill the agent can call
+
+Agent loops
+- send prompt to llm
+- llns reasons about what to od
+- agent will atomacticaly call the required rools
+= agent will recive response from tool
+- produce final answer
+
+
+
+Questions:
+The memory is native ot langchain, what they for creawi 
+
+
+1/11/2025 class
+
+LangGraph Library:
+
+ - Orchestrating and memory is langgraph
+ - Decision  grpah - giving capability to AI to make decision
+
+Why Langgraph ?
+LC was good at prototyping
+when it comes to using tools LC was breaking
+problems 
+  - chained flows - linear and harfd to debug
+  - no native state persistence
+
+Building blokces of Langgraph
+- nodes - atomic unit of langraph (llm call, tool call or simple python function)
+- edges - define data flow and decision routes
+- graph state - shared context that lives between nodes 
+- checkpointers -  save state and helps us to rollback
+- Memorysaver/redis saver - persistent state stores
+
+what is the differenct from kc and kf
+is node = agent 
+what is diff working memenoy and agenrt memorty
+
+         Langgrpah vs         Langchain
+execution graph               linear
+memory     statetful checpoint  traisent
+debug       easy                hard
+
+
+Understand graph stea:
+
+graph state acts as memory of the agent
+every nodes can read n or write in the state
+
+
+LamngGraph Memory:
+
+state schema
+
+checpinters 
+
+1- memory saver
+2- in memory saver
+3 redis saver/external stores
+
+Type Annotations:
+
+These type annotations will help to delcare the expected data types of the variables, function parameters and return value
+
+eg
+
+name: str = "sam"
+age: int = 29
+
+def greet(name: str) -> str:
+      return f"Hello {name}"
+
+
+Dictonaries 
+
+movie = {"name" : "avengers, "year": 2019}
+problem with dictonary is that it desont chek the data is correct type or not
+
+to solve this we use a typed dictonary and we will use this to define state in langgraph
+
+from typing import TypedDict
+class Movie(TypedDict):
+   name: str
+   year: int
+movie = Movie(name="avengers",year=2019)
+
+===
+
+LangGraph Peristence
+
+Langraph has built in persistence layer implementted though checkpoints
+When we compile the graph along with the checkpointer it saves a checkpoint
+The chekpoint
+
+
+do we need to use get() and typedict at same time 
+
+
+Checkpointers:
+
+- perist state per thread/run id
+
+3 types of checkpointers used
+
+- MemorySaver - in process 
+- InMemorySaver - much more lightwrigt
+- redissaver/externalstores - for prod
+
+we specify the checkpoint in the compile method
+
+
+
+
+
+State Schema:
+
+
+We are going to setup
+
+START -> Ingest_user -> chat -> summarize_if_long -> END
+
+
+
+Typed Dict:
+- to ensure the data is in partuclar sturcture we used typed dict
+
+Union:L
+Allows to declare a value of more than one type
+
+Optional:
+
+Itcan be of data type or nonw
+Any:
+
+cabn be any data typr
+
+
+LambdaA:
+
+
+
+State:
+
+- it is a shared data strcuture that hold current information or context of the application
+- it is like app mempry
+- amalogy white bosrd is state and participants are nodes
+
+Nodes:
+
+- node are indicutin functions that perform specific task
+- it has a input (current state) and process it and producrs and output or updated state
+
+Graph:
+
+- A graph is structure to map how nodes and connected and executed
+- think of a roadmap 
+
+Edges:
+
+are the connection between the nodes that determine the flow of exectuion
+
+Tools
+tools are specialized functions or utilities that node can utilize
+
+Toolnode:
+it job is to run tool
+
+Stategraph:
+
+Build and comile graph structure
+- manages nodes ,edgews and overall state
+
+Messages:
+
+Humanamessage
+AI message -respinse frok kll
+system emssage: used to proviude untrctions orcontet
+Toool message: used fopr sp[ecfic tool 
+Fction message: represent the result of function casll
+
+
+Tools:
+
+To make the AI perofrm an action we have to provide it with tools
+
+we wil include a calcuator or a text modifier
+
+
+Loop 
+inpout --> resoning --> decide to call tool or genetate output and then contuniue reasongin again and loop unitl it is satisfied
+
+we will use a node call tool node by using @tool
+use a tool for single purprose function
+
+Then biding the tools to the LLM
+
+
+
+
+Q
+deos the llm recoginzes the tools by its logical function name ?
+is the annotated metadata for llm
 
 
 

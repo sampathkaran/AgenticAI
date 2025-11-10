@@ -95,3 +95,42 @@ class Car:
 
 - methods are functions within the class
 
+API:
+
+What is Application programming interface
+
+Types of API:
+
+The most common API we use is the web api ire it works via http
+ie RESTAPIs==> use standard methods.
+
+GET - fewtch dasta
+post- send data
+PUT -is to update data
+DELETE -is to delete the data
+
+JSON  Java script Object notation
+
+most commn format to send data
+jsoin looks close to python dict like key value pair
+
+Agents needs live information - via API calls in format of json
+
+Call APIS --> Parse JSON --> Take Action
+
+Flow
+
+- Request -> send request ot API endpoint
+- Response 0> API returns json data
+- parsing -> extract valus from json
+- Action --> use the data in your agent
+
+APIs are eyes and ears to your agent and json is the language they speak
+
+
+Request library:
+allows ot make easy http request from website
+
+
+
+

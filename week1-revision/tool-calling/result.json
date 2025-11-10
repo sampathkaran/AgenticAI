@@ -1,0 +1,43 @@
+{
+    "content": "",
+    "additional_kwargs": {
+      "function_call": {
+        "name": "duckduckgo_results_json",
+        "arguments": "{\"query\": \"weather in Singapore today\"}"
+      }
+    },
+    "response_metadata": {
+      "prompt_feedback": {
+        "block_reason": 0,
+        "safety_ratings": []
+      },
+      "finish_reason": "STOP",
+      "model_name": "gemini-2.5-flash",
+      "safety_ratings": [],
+      "grounding_metadata": {},
+      "model_provider": "google_genai"
+    },
+    "id": "lc_run--dc7ef9ab-1eaa-4239-ae83-e56edee5329f-0",
+    "tool_calls": [
+      {
+        "name": "duckduckgo_results_json",
+        "args": {
+          "query": "weather in Singapore today"
+        },
+        "id": "57fa3372-110a-4bcc-8d49-c2d742219eec",
+        "type": "tool_call"
+      }
+    ],
+    "usage_metadata": {
+      "input_tokens": 76,
+      "output_tokens": 118,
+      "total_tokens": 194,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "output_token_details": {
+        "reasoning": 96
+      }
+    }
+  }
+  
